@@ -54,7 +54,7 @@ Go to the store and buy some more
 def print_verses_1(start_number=99):
     for number in range(start_number, 0, -1):
         verse = verse_template.replace("<number>", str(number))
-        print(verse.replace("<number - 1>", str(number-1 or "No")))
+        print((verse.replace("<number - 1>", str(number-1 or "No"))))
 
 # Consider the singular case
 #
@@ -68,7 +68,7 @@ def print_verses_2(start_number=99):
     for number in range(start_number, 0, -1):
         verse = verse_template.replace("<number>", str(number))
         verse = verse.replace("bottles", "bottle" + plural_suffix(number))
-        print(verse.replace("<number - 1>", str(number-1 or "No")))
+        print((verse.replace("<number - 1>", str(number-1 or "No"))))
 
 # where an auxiliary function returns the matching suffix (or not)::
 
@@ -95,7 +95,7 @@ def print_verses_3(start_number=99):
         verse = verse_template_2.replace("<number>", str(number))
         verse = verse.replace("<s>", plural_suffix(number), 2)
         verse = verse.replace("<s>", plural_suffix(number-1), 1)
-        print(verse.replace("<number - 1>", str(number-1 or "No")))
+        print((verse.replace("<number - 1>", str(number-1 or "No"))))
 
 
 # Command line use

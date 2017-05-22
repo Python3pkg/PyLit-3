@@ -345,7 +345,7 @@ def is_iterator_queue(object):
 def is_iterator_wrapper(obj):
     """Try if obj can wrap an iterator"""
     try:
-        it = obj(range(1))
+        it = obj(list(range(1)))
     except:
         return False
     try:

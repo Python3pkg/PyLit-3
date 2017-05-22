@@ -81,33 +81,33 @@ c2t_out_2 = IdentityFilter([
 
 # test ElispCode2TextFilter with one sample line
 f = ElispCode2TextFilter(c2t_in_1, **keyw)
-print "ElispCode2TextFilter with sample line: %s" \
-      % test(f, c2t_out_1)
+print("ElispCode2TextFilter with sample line: %s" \
+      % test(f, c2t_out_1))
 
 # test ElispText2CodeFilter with one sample line
 f = ElispText2CodeFilter(c2t_out_1, **keyw)
-print "ElispText2CodeFilter with sample line: %s" \
-      % test(f, c2t_in_1)
+print("ElispText2CodeFilter with sample line: %s" \
+      % test(f, c2t_in_1))
 
 # test ElispCode2TextFilter with one sample para
 f = ElispCode2TextFilter(c2t_in_2, **keyw)
-print "ElispCode2TextFilter with sample paragraph: %s" \
-      % test(f, c2t_out_2)
+print("ElispCode2TextFilter with sample paragraph: %s" \
+      % test(f, c2t_out_2))
 
 # test ElispText2CodeFilter with one sample para
 f = ElispText2CodeFilter(c2t_out_2, **keyw)
-print "ElispText2CodeFilter with sample paragraph: %s" \
-      % test(f, c2t_in_2)
+print("ElispText2CodeFilter with sample paragraph: %s" \
+      % test(f, c2t_in_2))
 
 # round-trip test code->txt->code with sample line
 f = ElispText2CodeFilter(ElispCode2TextFilter(c2t_in_1, **keyw), **keyw)
-print "round-trip test code->txt->code with sample line: %s" \
-      % test(f, c2t_in_1)
+print("round-trip test code->txt->code with sample line: %s" \
+      % test(f, c2t_in_1))
 
 # round-trip test code->txt->code with sample line
 f = ElispCode2TextFilter(ElispText2CodeFilter(c2t_out_1, **keyw), **keyw)
-print "round-trip test txt->code->txt with sample line: %s" \
-      % test(f, c2t_out_1)
+print("round-trip test txt->code->txt with sample line: %s" \
+      % test(f, c2t_out_1))
 
 # DISABLED 2007-02-21 -- these need the reverse of strip_comments(),
 # that is a function that prefix comment_string to non-code lines.
@@ -127,20 +127,20 @@ print "round-trip test txt->code->txt with sample line: %s" \
 
 # txt->code should preserve blank lines
 f = ElispText2CodeFilter(blank_lines, **keyw)
-print "txt->code with blank lines: %s" \
-      % test(f, blank_lines)
+print("txt->code with blank lines: %s" \
+      % test(f, blank_lines))
 
 # code->txt should preserve blank lines
 f = ElispCode2TextFilter(blank_lines, **keyw)
-print "code->txt with blank lines: %s" \
-      % test(f, blank_lines)
+print("code->txt with blank lines: %s" \
+      % test(f, blank_lines))
 
 # round-trip test txt->code->txt
 f = ElispText2CodeFilter(ElispCode2TextFilter(blank_lines, **keyw), **keyw)
-print "round-trip test txt->code->txt with blank lines: %s" \
-      % test(f, blank_lines)
+print("round-trip test txt->code->txt with blank lines: %s" \
+      % test(f, blank_lines))
 
 # round-trip test code->txt->code
 f = ElispCode2TextFilter(ElispText2CodeFilter(blank_lines, **keyw), **keyw)
-print "round-trip test txt->code->txt with blank lines: %s" \
-      % test(f, blank_lines)
+print("round-trip test txt->code->txt with blank lines: %s" \
+      % test(f, blank_lines))

@@ -156,6 +156,6 @@ def factorial(n):
 if __name__ == "__main__":
     print( "n n!" )
     for n in range(10):
-        print( n, factorial(n) )
+        print(( n, factorial(n) ))
 
 

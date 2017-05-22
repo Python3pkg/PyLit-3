@@ -63,20 +63,20 @@ class test_OptionValues(unittest.TestCase):
     defaults = {"a1": 1, "a2": False}
     def setUp(self):
         self.values = OptionValues(self.defaults)
-        print( self.values )
+        print(( self.values ))
 
     def test_setup(self):
         self.assertEqual( self.values.a1, 1 )
         self.assertEqual( self.values.a2, False )
 
     def test_as_dict(self):
-        print( "as_dict() ->", self.values.as_dict() )
+        print(( "as_dict() ->", self.values.as_dict() ))
         self.assertEqual( self.values.as_dict(), self.defaults )
 
     def test_complete(self):
         """complete should update non-existing values only"""
         self.values.complete(**{"a1": 2, "a2": 4, "a3": 3})
-        print( "completed ->", self.values )
+        print(( "completed ->", self.values ))
         self.assertEqual( self.values.a1 , 1, "must not overwrite existing value" )
         self.assertEqual( self.values.a2 , False, "must not overwrite existing value" )
         self.assertEqual( self.values.a3 , 3, "should set new attributes" )
@@ -108,14 +108,14 @@ class test_PylitOptions(unittest.TestCase):
         """parse cmd line args"""
         # default should appear in options
         values = self.options.parse_args(txt2code=False)
-        print( values, type(values), dir(values) )
+        print(( values, type(values), dir(values) ))
         self.assertEqual( values.txt2code , False )
         # "cmd line arg should appear as option overwriting default"
         values = self.options.parse_args(["--txt2code"], txt2code=False)
         self.assertEqual( values.txt2code , True )
         # "1st non option arg is infile, 2nd is outfile"
         values = self.options.parse_args(["--txt2code", "text.txt", "code.py"])
-        print( values.infile )
+        print(( values.infile ))
         self.assertEqual( values.infile , "text.txt" )
         self.assertEqual( values.outfile , "code.py" )
         # option with argument
@@ -174,12 +174,12 @@ class test_PylitOptions(unittest.TestCase):
         values.infile = "foo"
         values = self.options.complete_values(values)
         # the following options should be set:
-        print( values.infile ) # logo, as we give it...
-        print( values.outfile )
+        print(( values.infile )) # logo, as we give it...
+        print(( values.outfile ))
         self.assertEqual( values.outfile , "foo.out" ) # fallback extension .out added
-        print( values.txt2code )
+        print(( values.txt2code ))
         self.assertEqual( values.txt2code , True ) # the default
-        print( values.language )
+        print(( values.language ))
         self.assertEqual( values.language , "python" ) # the default
 
     def test_complete_values_txt(self):
@@ -200,7 +200,7 @@ class test_PylitOptions(unittest.TestCase):
         # should set outfile name
         self.assertEqual( values.outfile , "foo.py.txt" )
         # should set conversion directions according to extension
-        print( values.txt2code )
+        print(( values.txt2code ))
         self.assertEqual( values.txt2code , False, "set conversion according to extension" )
 
     def test_complete_values_dont_overwrite(self):
@@ -235,7 +235,7 @@ class test_PylitOptions(unittest.TestCase):
         values = OptionValues()
         values = self.options.complete_values(values)
         pprint(values)
-        print( "fallback language:", defaults.languages.default_factory )
+        print(( "fallback language:", defaults.languages.default_factory ))
         self.assertEqual( values.language, defaults.languages.default_factory() )
 
     def test_call(self):
@@ -299,8 +299,8 @@ class IOTests(unittest.TestCase):
 class test_Streams(IOTests):
     def test_is_newer(self):
         # this __file__ is older, than code file
-        print( __file__, os.path.getmtime(__file__) )
-        print( self.codepath, os.path.getmtime(self.codepath) )
+        print(( __file__, os.path.getmtime(__file__) ))
+        print(( self.codepath, os.path.getmtime(self.codepath) ))
         #
         self.assertTrue( is_newer(self.codepath, __file__), "file1 is newer" )
         self.assertFalse( is_newer(__file__, self.codepath), "file2 is newer" )
@@ -348,7 +348,7 @@ class test_Streams(IOTests):
 def test_get_converter():
     """Convert with with default or txt2code."""
     converter = get_converter(textdata)
-    print( converter.__class__ )
+    print(( converter.__class__ ))
     self.assertEqual( converter.__class__ , Text2Code )
     converter = get_converter(textdata, txt2code=False)
     self.assertEqual( converter.__class__ , Code2Text )
@@ -376,14 +376,14 @@ class test_Main(IOTests):
         """test conversion of text file to code file"""
         main(infile=self.txtpath, outfile=self.outpath)
         output = self.get_output()
-        print( repr(output) )
+        print(( repr(output) ))
         self.assertMultiLineEqual( output, code )
 
     def test_text_to_code_strip(self):
         """test conversion of text file to stripped code file"""
         main(infile=self.txtpath, outfile=self.outpath, strip=True)
         output = self.get_output()
-        print( repr(output) )
+        print(( repr(output) ))
         self.assertMultiLineEqual( output, stripped_code )
 
     def test_text_to_code_twice(self):
@@ -391,7 +391,7 @@ class test_Main(IOTests):
         main(infile=self.txtpath, outfile=self.outpath)
         main(infile=self.txtpath, outfile=self.outpath)
         output = self.get_output()
-        print( repr(output) )
+        print(( repr(output) ))
         self.assertMultiLineEqual( output, code )
 
     def test_code_to_text(self):
@@ -415,13 +415,13 @@ class test_Main(IOTests):
 
     def test_diff(self):
         result = main(infile=self.codepath, diff=True)
-        print( "diff return value", result )
+        print(( "diff return value", result ))
         self.assertFalse( result ) # no differences found
 
     def test_diff_with_differences(self):
         """diffing a file to itself should fail, as the input is converted"""
         result = main(infile=self.codepath, outfile=self.codepath, diff=True)
-        print( "diff return value", result )
+        print(( "diff return value", result ))
         self.assertTrue( result ) # differences found
 
     def test_execute(self):
@@ -442,11 +442,11 @@ class test_Programmatic_Use(IOTests):
     def test_conversion(self):
         with open_streams(self.txtpath) as files:
             (data, out_stream) = files
-            print( "data: %r"%data )
-            print( "out_stream: {0!r}".format(out_stream) )
+            print(( "data: %r"%data ))
+            print(( "out_stream: {0!r}".format(out_stream) ))
             converter = get_converter(data)
             lines = converter()
-            print( "output: {0!r}".format(lines) )
+            print(( "output: {0!r}".format(lines) ))
             # lines = converter()
             self.assertEqual( lines, codedata )
 

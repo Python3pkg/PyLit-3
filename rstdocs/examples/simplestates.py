@@ -133,7 +133,7 @@ class SimpleStates:
                       stored as class attributes
         """
         self.data = data
-        for (key, value) in keyw.items():
+        for (key, value) in list(keyw.items()):
             setattr(self, key, value)
 
 

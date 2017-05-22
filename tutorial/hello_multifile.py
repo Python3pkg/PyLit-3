@@ -2,7 +2,7 @@
 # another file::
 
 import greeting
-print( greeting.greeting )
+print(( greeting.greeting ))
 
 # Where ``greeting.py`` contains:
 #

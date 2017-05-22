@@ -48,7 +48,7 @@ master_doc = 'index'
 # General substitutions::
 
 project = 'PyLit'
-copyright = u'2009, Günter Milde'
+copyright = '2009, Günter Milde'
 
 # The default replacements for ``|version|`` and ``|release|``, also used in
 # various other places throughout the built documents.
@@ -247,7 +247,7 @@ reldelim1 = ' / '
 
 latex_documents = [
   ('index', 'PyLit.tex', 'PyLit Documentation',
-   u'Günter Milde', 'manual'),
+   'Günter Milde', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top

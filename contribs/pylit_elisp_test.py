@@ -67,23 +67,23 @@ text["section"] = ["\n",
 
 def test_elisp_code_preprocessor():
     """test the code preprocessing filter"""
-    for key in code.keys():
+    for key in list(code.keys()):
         data = code[key]
         soll = filtered_code[key]
         output = [line for line in elisp_code_preprocessor(data)]
-        print "ist  %r (%s)"%(output, key)
-        print "soll %r (%s)"%(soll, key)
+        print("ist  %r (%s)"%(output, key))
+        print("soll %r (%s)"%(soll, key))
         assert output == soll
     
 
 def test_elisp_code_postprocessor():
     """test the code preprocessing filter"""
-    for key in code.keys():
+    for key in list(code.keys()):
         data = filtered_code[key]
         soll = code[key]
         output = [line for line in elisp_code_postprocessor(data)]
-        print "ist  %r (%s)"%(output, key)
-        print "soll %r (%s)"%(soll, key)
+        print("ist  %r (%s)"%(output, key))
+        print("soll %r (%s)"%(soll, key))
         assert output == soll
     
 def test_elisp_settings():
@@ -93,13 +93,13 @@ def test_elisp_settings():
     assert defaults.postprocessors["text2elisp"] == elisp_code_postprocessor
 
 def test_elisp2text():
-    for key in code.keys():
+    for key in list(code.keys()):
         data = code[key]
         soll = text[key]
         converter = Code2Text(data, language="elisp")
         output = converter()
-        print "ist  %r (%s)"%(output, key)
-        print "soll %r (%s)"%(soll, key)
+        print("ist  %r (%s)"%(output, key))
+        print("soll %r (%s)"%(soll, key))
         assert output == soll
 
 class test_Code2Text(object):
@@ -113,33 +113,33 @@ class test_Text2Code(object):
         assert converter.postprocessor == elisp_code_postprocessor
 
     def test_call_without_filter(self):
-        for key in code.keys():
+        for key in list(code.keys()):
             data = text[key]
             soll = filtered_code[key]
             converter = Text2Code(data, comment_string=";; ")
             output = converter()
-            print "ist  %r (%s)"%(output, key)
-            print "soll %r (%s)"%(soll, key)
+            print("ist  %r (%s)"%(output, key))
+            print("soll %r (%s)"%(soll, key))
             assert output == soll
 
     def test_convert(self):
-        for key in code.keys():
+        for key in list(code.keys()):
             data = text[key]
             soll = filtered_code[key]
             converter = Text2Code(data, language="elisp")
             output = [line for line in converter.convert(data)]
-            print "ist  %r (%s)"%(output, key)
-            print "soll %r (%s)"%(soll, key)
+            print("ist  %r (%s)"%(output, key))
+            print("soll %r (%s)"%(soll, key))
             assert output == soll
 
     def test_call_with_filter(self):
-        for key in code.keys():
+        for key in list(code.keys()):
             data = text[key]
             soll = code[key]
             converter = Text2Code(data, language="elisp")
             output = converter()
-            print "ist  %r (%s)"%(output, key)
-            print "soll %r (%s)"%(soll, key)
+            print("ist  %r (%s)"%(output, key))
+            print("soll %r (%s)"%(soll, key))
             assert output == soll
 
 

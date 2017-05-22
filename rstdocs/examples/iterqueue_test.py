@@ -22,7 +22,7 @@ import unittest
 #
 # List all iterator wrapper objects::
 
-wrappers = [obj for obj in iterqueue.__dict__.values()
+wrappers = [obj for obj in list(iterqueue.__dict__.values())
             if is_iterator_wrapper(obj)]
 # print( "\n".join(repr(wrapper) for wrapper in wrappers) )
 
@@ -66,7 +66,7 @@ class Test_Wrappers( unittest.TestCase ):
         self.assertEqual( list(wrapper(iter(base))), list(base) )
         self.assertEqual( [i for i in wrapper(iter(base))], [i for i in base] )
 
-    def test_wrappers(self, base=range(3)):
+    def test_wrappers(self, base=list(range(3))):
         for wrapper in wrappers:
             self.wrap_ok( wrapper, base )
 
@@ -81,7 +81,7 @@ class Test_Peekables( unittest.TestCase ):
     def peek_ok(self, wrapper, base):
         """peek() should return next value but not advance the iterator"""
         print( wrapper )
-        print( wrapper.peek )
+        print(( wrapper.peek ))
         it = wrapper(iter(base))
         it.peek()
         first = it.peek()
@@ -92,7 +92,7 @@ class Test_Peekables( unittest.TestCase ):
         print( result )
         self.assertEqual( result, list(base) )
 
-    def test_peekables(self, base=range(3)):
+    def test_peekables(self, base=list(range(3))):
         """Test generator for peekable iterator wrappers"""
         for wrapper in peekables:
             self.peek_ok( wrapper, base )
@@ -107,7 +107,7 @@ class Test_Pushables( unittest.TestCase ):
 
     def push_ok(self, wrapper, base):
         """push(value) shall prepend `value` to iterator"""
-        print( wrapper.push )
+        print(( wrapper.push ))
         it = wrapper(iter(base))
         it.push(9)
         result = list(it)
@@ -117,7 +117,7 @@ class Test_Pushables( unittest.TestCase ):
     def push_while_iterating_ok(self, wrapper):
         """push shall work even in an iteration loop"""
         print( wrapper )
-        it = wrapper(iter(range(3)))
+        it = wrapper(iter(list(range(3))))
         result = []
         for i in it:
             if i == 1:
@@ -125,7 +125,7 @@ class Test_Pushables( unittest.TestCase ):
             result.append(i)
         self.assertEqual( result, [0, 1, 'xx', 2] )
 
-    def test_pushables(self, base=range(3)):
+    def test_pushables(self, base=list(range(3))):
         """Test generator for pushable iterator wrappers"""
         for wrapper in pushables:
             if not hasattr(wrapper, "push"):
@@ -169,7 +169,7 @@ class TestIteratorQueue( unittest.TestCase ):
         print( result )
         self.assertEqual( result, list(base) + [9] )
 
-    def test_iqueues(self, base=range(3)):
+    def test_iqueues(self, base=list(range(3))):
         """Test generator for iterator-queue wrappers"""
         for wrapper in iqueues:
             self.extend_ok( wrapper, base )
@@ -189,7 +189,7 @@ class Test_StateReporters( unittest.TestCase ):
            Non-empty iterator should evaluate to True
            the evaluation should not advance the iterator
            """
-        base = range(3) # make sure it is not empty!
+        base = list(range(3)) # make sure it is not empty!
         it0 = wrapper(iter([]))
         self.assertFalse( bool(it0) )
         self.assertEqual( list(it0), [] )
